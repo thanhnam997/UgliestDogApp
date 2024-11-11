@@ -1,0 +1,29 @@
+﻿@page
+@model UgliestDogApp.Pages.UgliestDogsModel
+@{
+    ViewData["Title"] = "Ugliest Dogs";
+}
+
+<h1>World's Ugliest Dog Contest Winners</h1>
+
+<!-- Dropdown to select a dog -->
+<form method="post">
+    <label for="dogSelect">Select a Dog:</label>
+    <select id="dogSelect" name="selectedDog">
+        @foreach (var dog in Model.DogList)
+        {
+            <option value="@dog.Value">@dog.Text</option>
+        }
+    </select>
+    <button type="submit">View Details</button>
+</form>
+
+@if (Model.SelectedDog != null)
+{
+    <h2>@Model.SelectedDog.Name</h2>
+    <p>Breed: @Model.SelectedDog.Breed</p>
+    <p>Year Won: @Model.SelectedDog.Year</p>
+
+    <!-- Image display for the selected dog -->
+    <img src="/images/@Model.SelectedDog.ImageFileName" alt="@Model.SelectedDog.Name" style="max-width: 300px;" />
+}
